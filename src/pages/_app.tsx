@@ -3,9 +3,17 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import localFont from "@next/font/local";
 
+import { DM_Sans } from "@next/font/google";
+
 import { api } from "../utils/api";
 
 import "../styles/globals.css";
+
+const dmSansFont = DM_Sans({
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 const satoshiFont = localFont({
   variable: "--font-satoshi",
@@ -63,6 +71,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         {`
           :root {
             --satoshi-font: ${satoshiFont.style.fontFamily};
+            --dm-sans-font: ${dmSansFont.style.fontFamily};
           }
         `}
       </style>
