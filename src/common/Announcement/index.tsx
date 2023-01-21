@@ -1,10 +1,10 @@
 import cx from "classix";
 
-interface Props {
+export interface AnnouncementProps {
   isLink?: boolean;
 }
 
-const Announcement = ({ isLink = true }: Props): JSX.Element => {
+const Announcement = ({ isLink = true }: AnnouncementProps): JSX.Element => {
   const Element = isLink ? "a" : "div";
 
   return (

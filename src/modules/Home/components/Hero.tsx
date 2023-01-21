@@ -18,7 +18,7 @@ const Hero = (): JSX.Element => {
   return (
     <section className="flex flex-col py-14 sm:py-20">
       <Announcement />
-      <h1 className="text-[2rem] font-bold capitalize leading-normal text-grey sm:text-[3.25rem]">
+      <h1 className="text-s text-[2rem] font-bold capitalize leading-normal text-grey sm:text-[3.25rem]">
         Find your perfect remote job in the philippines.
       </h1>
       {/* eslint-disable */}
