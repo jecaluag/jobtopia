@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Checkbox } from "src/common";
 import { DropdownLarge } from "src/common/Dropdown";
 import { referenceSorting } from "src/utils";

@@ -1,29 +1,20 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { DropdownLarge } from "src/common/Dropdown";
 import { WORK_TYPES } from "../constants";
 import { Checkbox } from "src/common";
 import { referenceSorting } from "src/utils";
+import useGetButtonTitle from "../hooks/useGetButtonTitle";
 
 const WorkTypesFilter = (): JSX.Element => {
   const [selectedWorkTypes, setSelectedWorkTypes] =
     useState<string[]>(WORK_TYPES);
 
-  const buttonTitle = useMemo(() => {
-    if (selectedWorkTypes.length === 0) {
-      return "No Work Type";
-    }
-    if (selectedWorkTypes.length === WORK_TYPES.length) {
-      return "Work Type";
-    }
-    if (selectedWorkTypes.length === 1) {
-      return `${selectedWorkTypes[0] || ""}`;
-    }
-
-    const [first = "", ...rest] = selectedWorkTypes;
-
-    return `${first} + ${rest.length} more`;
-  }, [selectedWorkTypes]);
+  const buttonTitle = useGetButtonTitle(
+    selectedWorkTypes,
+    WORK_TYPES.length,
+    "Work Type"
+  );
 
   const handleWorkTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

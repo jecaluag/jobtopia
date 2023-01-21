@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       <PageContainer>
         <Hero />
         <Search />
-        <div className="h-[2000px]"></div>
+        <div className="h-[2000px]" />
       </PageContainer>
     </>
   );

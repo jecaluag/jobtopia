@@ -20,7 +20,7 @@ const Checkbox = ({
   >
     <input
       type="checkbox"
-      className="h-4 w-4 rounded-lg checked:bg-primary"
+      className="h-4 w-4 rounded-lg checked:bg-yellow-400"
       {...props}
     />
     {label && label !== "" && <p className="text-gray-50">{label}</p>}

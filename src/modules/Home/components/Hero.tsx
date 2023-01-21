@@ -3,6 +3,7 @@ import TextTransition, { presets } from "react-text-transition";
 
 import { BOTTOM_TAGS } from "../constants";
 import { Announcement } from "../../../common";
+import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 
 const Hero = (): JSX.Element => {
   const [index, setIndex] = useState<number>(0);
@@ -36,6 +37,12 @@ const Hero = (): JSX.Element => {
         <br />
         Your go-to destination for remote job opportunities in the Philippines.
       </p>
+      <div className="mt-8">
+        <button className="flex items-center gap-3 rounded-md bg-secondary px-5 py-3 text-base font-semibold ring-secondaryLighten100 hover:bg-secondaryLighten focus:ring-2 sm:px-8 sm:py-3 sm:text-[18px]">
+          <span>Get Job Updates</span>
+          <ArrowLongRightIcon className="h-6 w-6" />
+        </button>
+      </div>
     </section>
   );
 };
