@@ -7,8 +7,9 @@ import { useOnClickOutside } from "../../hooks";
 interface CommonProps {
   buttonTitle: string;
   panelTitle?: string;
+  panelButtonTitle?: string;
   children: React.ReactNode | React.ReactNode[];
-  onClear: () => void;
+  onPanelButtonClick: () => void;
   onClick?: () => void;
 }
 
@@ -28,13 +29,14 @@ const DropdownLarge = ({
   buttonTitle,
   panelTitle,
   children,
+  panelButtonTitle = "Clear",
   hasMaxHeight = false,
   maxHeight = "max-h-60",
-  onClear,
+  onPanelButtonClick,
   onClick,
 }: DropdownLargeProps): JSX.Element => {
-  const panelRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
   const isEmmitingRef = useRef<boolean>(false);
 
   const handleButtonClick = () => {
@@ -76,9 +78,9 @@ const DropdownLarge = ({
               <button
                 type="button"
                 className="hover:underline"
-                onClick={onClear}
+                onClick={onPanelButtonClick}
               >
-                Clear
+                {panelButtonTitle}
               </button>
             </div>
             <div

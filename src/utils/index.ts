@@ -1,5 +1,8 @@
-export const sleep = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+import type { Notation } from "./types";
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   func: F,
@@ -12,7 +15,10 @@ export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   };
 }
 
-export function formatToCurrency(value?: number): string {
+export function formatToCurrency(
+  value?: number,
+  notation: Notation = "standard"
+): string {
   if (value == null) return "₱0.00";
 
   return new Intl.NumberFormat("en-PH", {
@@ -20,5 +26,10 @@ export function formatToCurrency(value?: number): string {
     currency: "PHP",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
+    notation: notation,
   }).format(value);
+}
+
+export function referenceSorting<T>(array: T[], ref: T[]): T[] {
+  return array.sort((a, b) => ref.indexOf(a) - ref.indexOf(b));
 }

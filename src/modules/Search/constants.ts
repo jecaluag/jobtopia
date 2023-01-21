@@ -11,3 +11,13 @@ export const WORK_TYPES = [
 export const SALARY_RANGE = [0, 200000];
 
 export const DEFAULT_RANGE_SLIDER_STEP = 5000;
+
+export const EXPERIENCE_LEVELS = [
+  "Entry Level",
+  "Associate",
+  "Mid Level",
+  "Mid-Senior Level",
+  "Senior Level",
+  "Director",
+  "Executive",
+];

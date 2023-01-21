@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import RangeSlider from "react-range-slider-input";
 
 import { DropdownLarge } from "src/common/Dropdown";
@@ -10,6 +10,7 @@ const [MIN_SALARY, MAX_SALARY] = SALARY_RANGE;
 
 const SalaryFilter = () => {
   const [salary, setSalary] = useState<number[]>(SALARY_RANGE);
+  const [finalSalary, setFinalSalary] = useState<number[]>(SALARY_RANGE);
   const [includeNoSpecified, setIncludeNoSpecified] = useState<boolean>(true);
 
   const handleSetIncludeNoSpecified = (
@@ -21,11 +22,29 @@ const SalaryFilter = () => {
 
   const handleClear = () => {
     setSalary(SALARY_RANGE);
+    setFinalSalary(SALARY_RANGE);
     setIncludeNoSpecified(true);
   };
 
+  const buttonTitle = useMemo(() => {
+    const currentMinSalary = finalSalary[0];
+    const currentMaxSalary = finalSalary[1];
+    if (currentMinSalary === MIN_SALARY && currentMaxSalary === MAX_SALARY) {
+      return "Salary";
+    }
+
+    return `${formatToCurrency(
+      currentMinSalary,
+      "compact"
+    )} - ${formatToCurrency(currentMaxSalary, "compact")}`;
+  }, [finalSalary]);
+
   return (
-    <DropdownLarge buttonTitle="Salary" onClear={handleClear}>
+    <DropdownLarge
+      buttonTitle={buttonTitle}
+      panelTitle="Salary per month"
+      onPanelButtonClick={handleClear}
+    >
       <div className="w-full">
         <div className="flex items-center justify-between">
           <p>{formatToCurrency(salary[0])}</p>
@@ -41,14 +60,13 @@ const SalaryFilter = () => {
             defaultValue={MAX_SALARY}
             step={DEFAULT_RANGE_SLIDER_STEP}
             onInput={setSalary}
-            onRangeDragEnd={() => console.log("onRangeDragEnd")}
-            onThumbDragEnd={() => console.log("onThumbDragEnd")}
+            onRangeDragEnd={() => setFinalSalary(salary)}
+            onThumbDragEnd={() => setFinalSalary(salary)}
           />
         </div>
         <div className="mt-8">
           <Checkbox
             label="Include no salary specified jobs"
-            defaultChecked={includeNoSpecified}
             checked={includeNoSpecified}
             onChange={handleSetIncludeNoSpecified}
           />
