@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { sleep } from "src/utils";
 import SearchSuggestion from "./SearchSuggestion";
 import { useBreakpoint } from "src/hooks";
+import { SEARCH_INPUT_PLACEHOLDER } from "../constants";
 
 const SearchInput = () => {
   const isSmOrLarger = useBreakpoint("sm");
@@ -52,7 +53,7 @@ const SearchInput = () => {
                     ref={inputRef}
                     type="text"
                     className="h-10 w-full rounded-lg bg-greyDark bg-none pl-0 text-gray-50 outline-none placeholder:truncate placeholder:text-zinc-400 sm:h-12  sm:pl-3 "
-                    placeholder="Search job titles, skills, companies, keywords..."
+                    placeholder={SEARCH_INPUT_PLACEHOLDER}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => void handleBlurInput()}
                     onChange={(e) => setQuery(e.target.value)}

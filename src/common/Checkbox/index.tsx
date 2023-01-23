@@ -1,9 +1,10 @@
 import { cx } from "classix";
 import React from "react";
+import type { ClassixClassName } from "src/types/common";
 
 interface CommonProps {
   label?: string;
-  className?: string | boolean | null | undefined;
+  className?: ClassixClassName;
 }
 
 export type CheckboxProps = CommonProps &

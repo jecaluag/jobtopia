@@ -1,7 +1,7 @@
 import create from "@kodingdotninja/use-tailwind-breakpoint";
-import { useLayoutEffect } from "react";
 
 import screens from "tailwind.screens";
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 
 // eslint-disable-next-line
 const { useBreakpoint: _useBreakPoint } = create(screens);
@@ -12,7 +12,7 @@ export const useBreakpoint = (
   const isBreakpointOrLarger = _useBreakPoint(breakpoint);
 
   // Workaround for a bug with the use-tailwind-breakpoint library.
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     window.dispatchEvent(new Event("resize"));
   }, []);
 

@@ -33,3 +33,5 @@ export function formatToCurrency(
 export function referenceSorting<T>(array: T[], ref: T[]): T[] {
   return array.sort((a, b) => ref.indexOf(a) - ref.indexOf(b));
 }
+
+export const isBrowser = typeof window !== "undefined";
