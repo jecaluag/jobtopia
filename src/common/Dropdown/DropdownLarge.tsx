@@ -1,8 +1,9 @@
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { cx } from "classix";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
-import { useOnClickOutside } from "../../hooks";
+
+import useDropdown from "./useDropdown";
+import type { MaxHeightProps } from "./types";
 
 interface CommonProps {
   buttonTitle: string;
@@ -12,16 +13,6 @@ interface CommonProps {
   onPanelButtonClick: () => void;
   onClick?: () => void;
 }
-
-type MaxHeightProps =
-  | {
-      hasMaxHeight?: false;
-      maxHeight?: never;
-    }
-  | {
-      hasMaxHeight: true;
-      maxHeight?: string;
-    };
 
 export type DropdownLargeProps = CommonProps & MaxHeightProps;
 
@@ -33,35 +24,24 @@ const DropdownLarge = ({
   hasMaxHeight = false,
   maxHeight = "max-h-60",
   onPanelButtonClick,
-  onClick,
+  onClick: customOnClick,
 }: DropdownLargeProps): JSX.Element => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const panelRef = useRef<HTMLDivElement | null>(null);
-  const isEmmitingRef = useRef<boolean>(false);
-
-  const handleButtonClick = () => {
-    if (isEmmitingRef.current) return;
-    setIsOpen((prev) => !prev);
-    onClick && onClick();
-  };
-
-  useOnClickOutside(panelRef, () => {
-    isEmmitingRef.current = true;
-    setIsOpen(false);
-    setTimeout(() => {
-      isEmmitingRef.current = false;
-    }, 100);
-  });
+  const { isOpen, onButtonClick, panelRef } = useDropdown(customOnClick);
 
   return (
     <div className="relative">
       <button
         type="button"
         className="flex items-center rounded-lg bg-dimBlack py-2 px-4 font-medium text-gray-50 ring-zinc-500 hover:bg-dimBlackLighten focus:ring-2"
-        onClick={handleButtonClick}
+        onClick={onButtonClick}
       >
         <span>{buttonTitle}</span>
-        <ChevronDownIcon className="ml-3 h-4 w-4 text-gray-50" />
+        <ChevronDownIcon
+          className={cx(
+            "ml-3 h-4 w-4 text-gray-50 transition",
+            isOpen && "rotate-180"
+          )}
+        />
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (

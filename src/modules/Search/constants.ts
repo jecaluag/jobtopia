@@ -32,9 +32,11 @@ export const TAG_TYPE_KEYS = {
 };
 
 export const tagColorClassNames = {
-  [TAG_TYPE_KEYS.skills]: "bg-blue-100 text-blue-800",
-  [TAG_TYPE_KEYS.companies]: "bg-green-100 text-green-800",
-  [TAG_TYPE_KEYS.jobTitle]: "bg-yellow-100 text-yellow-800",
+  [TAG_TYPE_KEYS.skills]: "bg-blue-100 text-blue-800 border-2 border-blue-800",
+  [TAG_TYPE_KEYS.companies]:
+    "bg-green-100 text-green-800 border-2 border-green-800",
+  [TAG_TYPE_KEYS.jobTitle]:
+    "bg-yellow-100 text-yellow-800 border-2 border-yellow-800",
 };
 
 export const sampleTags = [

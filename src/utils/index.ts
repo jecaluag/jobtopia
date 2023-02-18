@@ -1,3 +1,4 @@
+import Color from "color";
 import type { Notation } from "./types";
 
 export function sleep(ms: number) {
@@ -35,3 +36,23 @@ export function referenceSorting<T>(array: T[], ref: T[]): T[] {
 }
 
 export const isBrowser = typeof window !== "undefined";
+
+export const getSeachItemColor = (color: string | null) => {
+  if (!color) {
+    return { tagBgColor: "#2B2B2B", tagBorderColor: "#adadad", isBgDark: true };
+  }
+
+  const isBgDark = Color(color).isDark();
+  const tagBgColor = isBgDark
+    ? Color(color).lighten(0.25).hexa()
+    : Color(color).darken(0.25).hexa();
+  const tagBorderColor = isBgDark
+    ? Color(color).lighten(0.5).hexa()
+    : Color(color).darken(0.5).hexa();
+
+  return {
+    tagBgColor,
+    tagBorderColor,
+    isBgDark,
+  };
+};

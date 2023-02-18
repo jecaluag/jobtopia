@@ -4,6 +4,7 @@ import Head from "next/head";
 import { PageContainer } from "../../../common";
 import { Search } from "../../";
 import Hero from "./Hero";
+import SearchResult from "src/modules/SearchResult";
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
       <PageContainer>
         <Hero />
         <Search />
+        <SearchResult />
         <div className="h-[2000px]" />
       </PageContainer>
     </>
