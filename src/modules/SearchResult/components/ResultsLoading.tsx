@@ -11,7 +11,7 @@ const ResultsLoading = ({ count = SKELETON_ITEM_NO }: ResultsLoadingProps) => (
       .map((_, index) => (
         <div
           key={index}
-          className="my-5 h-56 w-full animate-pulse rounded-2xl bg-dimBlack"
+          className="my-5 h-96 w-full animate-pulse rounded-2xl bg-dimBlack sm:h-60"
         ></div>
       ))}
   </>

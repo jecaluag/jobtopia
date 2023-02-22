@@ -19,14 +19,24 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
     <div
       key={result.id}
       role="listitem"
-      className="group my-5 flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl"
+      className={cx(
+        "group my-5 flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl hover:brightness-110",
+        result.isFeatured
+          ? "background-animate bg-gradient-to-r from-red-500 via-blue-500 to-yellow-500"
+          : "bg-white"
+      )}
     >
       <div
-        className={`flex-1 overflow-hidden px-10 py-6 text-white`}
-        style={{ backgroundColor: result.bgColor ?? "#1c1c1c" }}
+        className={`flex-1 overflow-hidden rounded-2xl px-6 py-6 text-white sm:px-10`}
+        style={{
+          backgroundColor: result.bgColor ?? "#1c1c1c",
+          width: "calc(100% - 6px)",
+          height: "calc(100% - 6px)",
+          margin: 3,
+        }}
       >
-        <div className="flex gap-4">
-          <div className="h-14 w-14 rounded-lg bg-dimBlack p-3">
+        <div className="flex gap-3 sm:gap-4">
+          <div className="flex h-14 w-14 min-w-[3.5rem] items-center justify-center rounded-lg bg-dimBlack p-3">
             <Image
               alt="company-lgoo"
               src={result.company.logo}
@@ -35,20 +45,29 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
               className="object-contain"
             />
           </div>
-          <div className="flex h-full w-full items-center">
+          <div
+            className="flex h-full items-center"
+            style={{
+              width: "calc(100% - 4.2rem)",
+            }}
+          >
             <div
               className={cx(
-                "flex flex-1 flex-col justify-between",
+                "flex flex-col justify-between overflow-hidden",
                 isBgDark ? "text-white" : "text-dimBlack"
               )}
             >
-              <h3 className="text-xl font-semibold">{result.jobTitle}</h3>
-              <p className="text-lg">{result.company.name}</p>
+              <h3 className="truncate text-lg font-semibold sm:text-xl">
+                {result.jobTitle}
+              </h3>
+              <p className="text-base sm:text-lg">{result.company.name}</p>
             </div>
+          </div>
+          <div className="hidden sm:block">
             <div className="hidden gap-2 group-hover:flex">
               <button
                 className={cx(
-                  "rounded-md px-6 py-2 font-bold hover:ring-2 active:ring-4",
+                  "h-12 rounded-md px-6 py-2 font-bold hover:ring-2 active:ring-4",
                   isBgDark
                     ? "bg-white text-dimBlack ring-zinc-400 hover:bg-gray-50"
                     : "bg-dimBlack text-white ring-zinc-500 hover:bg-dimBlackLighten"
@@ -58,13 +77,13 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
               </button>
               <button
                 className={cx(
-                  "flex items-center gap-1 rounded-md border px-6 py-2 font-bold hover:opacity-75",
+                  "flex h-12 items-center gap-1 rounded-md border px-6 py-2 font-bold hover:opacity-75",
                   isBgDark
                     ? "border-white text-white"
                     : "border-dimBlack text-dimBlack"
                 )}
               >
-                <span>View Job</span>
+                <span className="whitespace-nowrap">View Job</span>
                 <svg
                   width="16"
                   height="17"
@@ -75,26 +94,26 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
                   <path
                     d="M13.6667 15.1667H2.33335"
                     stroke={isBgDark ? "white" : "#2B2B2B"}
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M12.6667 2.83334L3.33335 12.1667"
                     stroke={isBgDark ? "white" : "#2B2B2B"}
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M12.6667 9.68V2.83334H5.82002"
                     stroke={isBgDark ? "white" : "#2B2B2B"}
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </button>
@@ -102,13 +121,17 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap">
+        <div className="mt-4 flex flex-nowrap overflow-x-auto pb-3">
           {result.isFeatured && (
             <Badge
-              className={cx(isBgDark ? "text-white" : "text-dimBlack")}
+              className={cx(
+                "mr-1 text-sm sm:mr-3",
+                isBgDark ? "text-white" : "text-dimBlack"
+              )}
               style={{
                 backgroundColor: tagBgColor,
                 border: `2px solid ${tagBorderColor}`,
+                flex: "0 0 auto",
               }}
             >
               <div className="flex w-full items-center gap-3 px-2 text-sm font-semibold">
@@ -117,10 +140,14 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
             </Badge>
           )}
           <Badge
-            className={cx(isBgDark ? "text-white" : "text-dimBlack")}
+            className={cx(
+              "mr-1 text-sm sm:mr-3",
+              isBgDark ? "text-white" : "text-dimBlack"
+            )}
             style={{
               backgroundColor: tagBgColor,
               border: `1px solid ${tagBorderColor}`,
+              flex: "0 0 auto",
             }}
           >
             <div className="flex w-full items-center gap-2 px-2 text-sm">
@@ -134,10 +161,14 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
             </div>
           </Badge>
           <Badge
-            className={cx(isBgDark ? "text-white" : "text-dimBlack")}
+            className={cx(
+              "mr-1 text-sm sm:mr-3",
+              isBgDark ? "text-white" : "text-dimBlack"
+            )}
             style={{
               backgroundColor: tagBgColor,
               border: `1px solid ${tagBorderColor}`,
+              flex: "0 0 auto",
             }}
           >
             <div className="flex w-full items-center gap-2 px-2 text-sm">
@@ -151,10 +182,14 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
             </div>
           </Badge>
           <Badge
-            className={cx(isBgDark ? "text-white" : "text-dimBlack")}
+            className={cx(
+              "mr-1 text-sm sm:mr-3",
+              isBgDark ? "text-white" : "text-dimBlack"
+            )}
             style={{
               backgroundColor: tagBgColor,
               border: `1px solid ${tagBorderColor}`,
+              flex: "0 0 auto",
             }}
           >
             <div className="flex w-full items-center gap-2 px-2 text-sm">
@@ -169,7 +204,7 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
           </Badge>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-2 sm:mt-3">
           <p
             className={cx(
               "text-base",
@@ -183,7 +218,7 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
         </div>
       </div>
 
-      <div className="bg-white py-4 px-10 text-dimBlack">
+      <div className="mt-[1px] rounded-b-2xl bg-white py-4 px-6 text-dimBlack sm:px-10">
         <div className="flex items-center justify-between">
           <div className="inline-flex gap-2">
             <svg
@@ -198,7 +233,9 @@ const SearchResultItem = ({ result }: SearchResultItemProps) => {
           </div>
           <div>
             {result.salary && (
-              <h4 className="text-lg font-bold">₱ {result.salary}/mo</h4>
+              <h4 className="text-base font-bold sm:text-lg">
+                ₱ {result.salary}/mo
+              </h4>
             )}
           </div>
         </div>

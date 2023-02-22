@@ -10,7 +10,7 @@ const SearchFilter = (): JSX.Element => {
 
   return (
     <div className="inline-flex items-center gap-3">
-      <p className="font-medium text-gray-50">Sort by:</p>
+      <p className="hidden font-medium text-gray-50 sm:block">Sort by:</p>
       <Dropdown
         buttonTitle={buttonTitle}
         items={FILTERS}

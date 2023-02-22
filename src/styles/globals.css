@@ -222,3 +222,23 @@ select.mobile:focus {
   border-color: green;
   outline: 0;
 }
+
+.background-animate {
+  background-size: 400%;
+
+  -webkit-animation: BgAnimate 3s ease infinite;
+  -moz-animation: BgAnimate 3s ease infinite;
+  animation: BgAnimate 3s ease infinite;
+}
+
+@keyframes BgAnimate {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}

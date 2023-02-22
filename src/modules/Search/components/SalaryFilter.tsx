@@ -33,10 +33,12 @@ const SalaryFilter = () => {
       return "Salary";
     }
 
-    return `${formatToCurrency(
-      currentMinSalary,
-      "compact"
-    )} - ${formatToCurrency(currentMaxSalary, "compact")}`;
+    const formattedMinSalary = formatToCurrency(currentMinSalary, "compact");
+    const formattedMaxSalary = formatToCurrency(currentMaxSalary, "compact");
+
+    return `${formattedMinSalary} - ${formattedMaxSalary}${
+      currentMaxSalary && currentMaxSalary >= (MAX_SALARY as number) ? "+" : ""
+    }`;
   }, [finalSalary]);
 
   return (

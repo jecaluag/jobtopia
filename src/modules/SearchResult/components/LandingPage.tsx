@@ -6,7 +6,9 @@ const SeachResult = (): JSX.Element => {
     <section className="mt-8">
       <div className="flex w-full items-center justify-between py-3">
         <>
-          <h2 className="text-2xl font-bold text-gray-50">612 Results</h2>
+          <h2 className="text-xl font-bold text-gray-50 sm:text-2xl">
+            612 Results
+          </h2>
           {/* Loading Result Count */}
           {/* <div className="h-6 w-32 animate-pulse rounded-full bg-zinc-700" /> */}
         </>

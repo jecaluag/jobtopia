@@ -52,7 +52,7 @@ const Dropdown = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="r-0 absolute top-[50px] w-52 rounded-md bg-dimBlack text-gray-50"
+            className="absolute top-[50px] right-0 w-52 rounded-md bg-dimBlack text-gray-50 sm:left-0"
           >
             <ul
               className={cx("overflow-y-auto p-3", hasMaxHeight && maxHeight)}
